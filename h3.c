@@ -50,6 +50,8 @@ PHP_INI_END()
 
 /* Every user-visible function in PHP should document itself in the source */
 
+/* {{{ proto H3Index geoToH3(double $lat, double $lon, long $resolution)
+ */
 PHP_FUNCTION(geoToH3)
 {
     zend_long resolution;
@@ -68,7 +70,10 @@ PHP_FUNCTION(geoToH3)
 
     RETURN_LONG(indexed);
 }
+/* }}} */
 
+/* {{{ proto array h3ToGeo(long $indexed)
+ */
 PHP_FUNCTION(h3ToGeo)
 {
     zend_long indexed;
@@ -90,7 +95,10 @@ PHP_FUNCTION(h3ToGeo)
     add_assoc_double(return_value, "lat", lat_zval);
     add_assoc_double(return_value, "lon", lon_zval);
 }
+/* }}} */
 
+/* {{{ proto array h3ToGeo(long $indexed)
+ */
 PHP_FUNCTION(h3ToGeoBoundary)
 {
     zend_long indexed;
@@ -122,7 +130,10 @@ PHP_FUNCTION(h3ToGeoBoundary)
         add_index_zval(return_value, i, &lat_lon_arr);
     }
 }
+/* }}} */
 
+/* {{{ proto long h3GetResolution(long $indexed)
+ */
 PHP_FUNCTION(h3GetResolution)
 {
     zend_long indexed;
@@ -136,7 +147,10 @@ PHP_FUNCTION(h3GetResolution)
 
     RETURN_LONG(resolution);
 }
+/* }}} */
 
+/* {{{ proto int h3GetBaseCell(long $indexed)
+ */
 PHP_FUNCTION(h3GetBaseCell)
 {
     zend_long indexed;
@@ -150,7 +164,10 @@ PHP_FUNCTION(h3GetBaseCell)
 
     RETURN_LONG(base_cell);
 }
+/* }}} */
 
+/* {{{ proto H3Index stringToH3(string $str)
+ */
 PHP_FUNCTION(stringToH3)
 {
     char *str;
@@ -165,7 +182,10 @@ PHP_FUNCTION(stringToH3)
 
     RETURN_LONG(indexed);
 }
+/* }}} */
 
+/* {{{ proto string h3ToString(long $indexed)
+ */
 PHP_FUNCTION(h3ToString)
 {
     zend_long indexed;
@@ -180,7 +200,10 @@ PHP_FUNCTION(h3ToString)
 
     RETURN_STRINGL(str, 17);
 }
+/* }}} */
 
+/* {{{ proto bool h3IsValid(long $indexed)
+ */
 PHP_FUNCTION(h3IsValid)
 {
     zend_long indexed;
@@ -199,7 +222,10 @@ PHP_FUNCTION(h3IsValid)
         RETURN_TRUE;
     }
 }
+/* }}} */
 
+/* {{{ proto bool h3IsResClassIII(long $indexed)
+ */
 PHP_FUNCTION(h3IsResClassIII)
 {
     zend_long indexed;
@@ -218,7 +244,10 @@ PHP_FUNCTION(h3IsResClassIII)
         RETURN_TRUE;
     }
 }
+/* }}} */
 
+/* {{{ proto bool h3IsPentagon(long $indexed)
+ */
 PHP_FUNCTION(h3IsPentagon)
 {
     zend_long indexed;
@@ -237,7 +266,10 @@ PHP_FUNCTION(h3IsPentagon)
         RETURN_TRUE;
     }
 }
+/* }}} */
 
+/* {{{ proto array h3IsPentagon(long $indexed)
+ */
 PHP_FUNCTION(h3GetFaces)
 {
     zend_long indexed;
@@ -261,7 +293,10 @@ PHP_FUNCTION(h3GetFaces)
     }
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto long maxFaceCount(long $indexed)
+ */
 PHP_FUNCTION(maxFaceCount)
 {
     zend_long indexed;
@@ -276,7 +311,10 @@ PHP_FUNCTION(maxFaceCount)
 
     RETURN_LONG(count);
 }
+/* }}} */
 
+/* {{{ proto array kRing(long $indexed, long $k)
+ */
 PHP_FUNCTION(kRing)
 {
     zend_long indexed, k;
@@ -300,7 +338,10 @@ PHP_FUNCTION(kRing)
 
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto long maxKringSize(long $k)
+ */
 PHP_FUNCTION(maxKringSize)
 {
     zend_long k;
@@ -315,7 +356,10 @@ PHP_FUNCTION(maxKringSize)
 
     RETURN_LONG(size);
 }
+/* }}} */
 
+/* {{{ proto array kRingDistances(long $k)
+ */
 PHP_FUNCTION(kRingDistances)
 {
     zend_long indexed, k;
@@ -348,7 +392,10 @@ PHP_FUNCTION(kRingDistances)
     free(outs);
     free(distances);
 }
+/* }}} */
 
+/* {{{ proto array hexRange(long $k)
+ */
 PHP_FUNCTION(hexRange)
 {
     zend_long indexed, k;
@@ -375,7 +422,10 @@ PHP_FUNCTION(hexRange)
 
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto array hexRangeDistances(long $k)
+ */
 PHP_FUNCTION(hexRangeDistances)
 {
     zend_long indexed, k;
@@ -411,7 +461,10 @@ PHP_FUNCTION(hexRangeDistances)
     free(outs);
     free(distances);
 }
+/* }}} */
 
+/* {{{ proto array hexRanges(array $ranges, long $k)
+ */
 PHP_FUNCTION(hexRanges)
 {
     zend_long k;
@@ -452,7 +505,10 @@ PHP_FUNCTION(hexRanges)
     free(indexed);
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto array hexRing(long $indexed, long $k)
+ */
 PHP_FUNCTION(hexRing)
 {
     zend_long indexed, k;
@@ -479,7 +535,10 @@ PHP_FUNCTION(hexRing)
 
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto array h3Line(long $start, long $end)
+ */
 PHP_FUNCTION(h3Line)
 {
     zend_long start, end;
@@ -508,7 +567,10 @@ PHP_FUNCTION(h3Line)
 
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto long h3LineSize(long $start, long $end)
+ */
 PHP_FUNCTION(h3LineSize)
 {
     zend_long start, end;
@@ -530,7 +592,10 @@ PHP_FUNCTION(h3LineSize)
         RETURN_LONG(size);
     }
 }
+/* }}} */
 
+/* {{{ proto long h3Distance(long $origin, long $h3)
+ */
 PHP_FUNCTION(h3Distance)
 {
     zend_long origin, h3;
@@ -545,7 +610,10 @@ PHP_FUNCTION(h3Distance)
 
     RETURN_LONG(distance);
 }
+/* }}} */
 
+/* {{{ proto array experimentalH3ToLocalIj(long $origin, long $h3)
+ */
 //This function is experimental, and its output is not guaranteed to be compatible across different versions of H3.
 PHP_FUNCTION(experimentalH3ToLocalIj)
 {
@@ -568,7 +636,10 @@ PHP_FUNCTION(experimentalH3ToLocalIj)
         add_assoc_long(return_value, "j", ij.j);
     }
 }
+/* }}} */
 
+/* {{{ proto long experimentalLocalIjToH3(long $origin, array $ij_zval)
+ */
 //This function is experimental, and its output is not guaranteed to be compatible across different versions of H3.
 PHP_FUNCTION(experimentalLocalIjToH3)
 {
@@ -594,7 +665,10 @@ PHP_FUNCTION(experimentalLocalIjToH3)
         RETURN_LONG(out);
     }
 }
+/* }}} */
 
+/* {{{ proto long h3ToParent(long $indexed, int $parentRes)
+ */
 PHP_FUNCTION(h3ToParent)
 {
     zend_long indexed;
@@ -609,7 +683,10 @@ PHP_FUNCTION(h3ToParent)
 
     RETURN_LONG(h3Parent);
 }
+/* }}} */
 
+/* {{{ proto array h3ToChildren(long $indexed, int $childrenRes)
+ */
 PHP_FUNCTION(h3ToChildren)
 {
     zend_long indexed, childrenRes;
@@ -632,7 +709,10 @@ PHP_FUNCTION(h3ToChildren)
 
     free(h3Childrens);
 }
+/* }}} */
 
+/* {{{ proto long maxH3ToChildrenSize(long $indexed, int $childrenRes)
+ */
 PHP_FUNCTION(maxH3ToChildrenSize)
 {
     zend_long indexed, childrenRes;
@@ -646,7 +726,10 @@ PHP_FUNCTION(maxH3ToChildrenSize)
 
     RETURN_LONG(childrenSize);
 }
+/* }}} */
 
+/* {{{ proto long h3ToCenterChild(long $indexed, int $childrenRes)
+ */
 PHP_FUNCTION(h3ToCenterChild)
 {
     zend_long indexed, childrenRes;
@@ -661,7 +744,10 @@ PHP_FUNCTION(h3ToCenterChild)
 
     RETURN_LONG(centerChild);
 }
+/* }}} */
 
+/* {{{ proto array h3Compact(array $indexes)
+ */
 PHP_FUNCTION(h3Compact)
 {
     zval *compactedSet_zval;
@@ -701,7 +787,10 @@ PHP_FUNCTION(h3Compact)
     free(outs);
     free(indexed);
 }
+/* }}} */
 
+/* {{{ proto array uncompact(array $compacted, long $resolution)
+ */
 PHP_FUNCTION(uncompact)
 {
     zend_long uncompactRes;
@@ -741,7 +830,10 @@ PHP_FUNCTION(uncompact)
     free(indexed);
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto long maxUncompactSize(array $compacted, long $resolution)
+ */
 PHP_FUNCTION(maxUncompactSize)
 {
     zend_long uncompactRes;
@@ -770,7 +862,10 @@ PHP_FUNCTION(maxUncompactSize)
 
     RETURN_LONG(uncompactedSize);
 }
+/* }}} */
 
+/* {{{ proto bool h3IndexesAreNeighbors(long $origin, long $destination)
+ */
 PHP_FUNCTION(h3IndexesAreNeighbors)
 {
     zend_long origin, destination;
@@ -789,7 +884,10 @@ PHP_FUNCTION(h3IndexesAreNeighbors)
         RETURN_FALSE;
     }
 }
+/* }}} */
 
+/* {{{ proto long getH3UnidirectionalEdge(long $origin, long $destination)
+ */
 PHP_FUNCTION(getH3UnidirectionalEdge)
 {
     zend_long origin, destination;
@@ -807,7 +905,10 @@ PHP_FUNCTION(getH3UnidirectionalEdge)
 
     RETURN_LONG(index);
 }
+/* }}} */
 
+/* {{{ proto bool h3UnidirectionalEdgeIsValid(long $edge)
+ */
 PHP_FUNCTION(h3UnidirectionalEdgeIsValid)
 {
     zend_long edge;
@@ -826,7 +927,10 @@ PHP_FUNCTION(h3UnidirectionalEdgeIsValid)
         RETURN_FALSE;
     }
 }
+/* }}} */
 
+/* {{{ proto long getOriginH3IndexFromUnidirectionalEdge(long $edge)
+ */
 PHP_FUNCTION(getOriginH3IndexFromUnidirectionalEdge)
 {
     zend_long edge;
@@ -840,7 +944,10 @@ PHP_FUNCTION(getOriginH3IndexFromUnidirectionalEdge)
 
     RETURN_LONG(index);
 }
+/* }}} */
 
+/* {{{ proto long getDestinationH3IndexFromUnidirectionalEdge(long $edge)
+ */
 PHP_FUNCTION(getDestinationH3IndexFromUnidirectionalEdge)
 {
     zend_long edge;
@@ -854,7 +961,10 @@ PHP_FUNCTION(getDestinationH3IndexFromUnidirectionalEdge)
 
     RETURN_LONG(index);
 }
+/* }}} */
 
+/* {{{ proto array getH3IndexesFromUnidirectionalEdge(long $edge)
+ */
 PHP_FUNCTION(getH3IndexesFromUnidirectionalEdge)
 {
     zend_long edge;
@@ -874,7 +984,10 @@ PHP_FUNCTION(getH3IndexesFromUnidirectionalEdge)
         add_index_long(return_value, i, originDestination[i]);
     }
 }
+/* }}} */
 
+/* {{{ proto array getH3UnidirectionalEdgesFromHexagon(long $edge)
+ */
 PHP_FUNCTION(getH3UnidirectionalEdgesFromHexagon)
 {
     zend_long edge;
@@ -894,7 +1007,10 @@ PHP_FUNCTION(getH3UnidirectionalEdgesFromHexagon)
         add_index_long(return_value, i, edges[i]);
     }
 }
+/* }}} */
 
+/* {{{ proto array getH3UnidirectionalEdgeBoundary(long $edge)
+ */
 PHP_FUNCTION(getH3UnidirectionalEdgeBoundary)
 {
     zend_long edge;
@@ -927,7 +1043,10 @@ PHP_FUNCTION(getH3UnidirectionalEdgeBoundary)
         add_index_zval(return_value, v, &lat_lon_arr);
     }
 }
+/* }}} */
 
+/* {{{ proto array polyfill(array $geopolygons, long $resolution)
+ */
 PHP_FUNCTION(polyfill)
 {
     zval *geopolygon_zval;
@@ -1000,7 +1119,10 @@ PHP_FUNCTION(polyfill)
     free(holes_geofaces);
     free(polyfillOut);
 }
+/* }}} */
 
+/* {{{ proto array maxPolyfillSize(array $geopolygons, long $resolution)
+ */
 PHP_FUNCTION(maxPolyfillSize)
 {
     zval *geopolygon_zval;
@@ -1065,7 +1187,10 @@ PHP_FUNCTION(maxPolyfillSize)
 
     RETURN_LONG(polyfillsize);
 }
+/* }}} */
 
+/* {{{ proto array h3SetToLinkedGeo(array $h3set)
+ */
 PHP_FUNCTION(h3SetToLinkedGeo)
 {
     zval *h3set_zval;
@@ -1139,7 +1264,10 @@ PHP_FUNCTION(h3SetToLinkedGeo)
 
     destroyLinkedPolygon(&polygon);
 }
+/* }}} */
 
+/* {{{ proto double degsToRads(souble $lat_lon)
+ */
 PHP_FUNCTION(degsToRads)
 {
     double lat_lon;
@@ -1153,7 +1281,10 @@ PHP_FUNCTION(degsToRads)
 
     RETURN_DOUBLE(radians_lat_lon);
 }
+/* }}} */
 
+/* {{{ proto double radsToDegs(souble $lat_lon)
+ */
 PHP_FUNCTION(radsToDegs)
 {
     double lat_lon;
@@ -1167,7 +1298,10 @@ PHP_FUNCTION(radsToDegs)
 
     RETURN_DOUBLE(degrees_lat_lon);
 }
+/* }}} */
 
+/* {{{ proto double hexAreaKm2(long $res)
+ */
 PHP_FUNCTION(hexAreaKm2)
 {
     zend_long res;
@@ -1181,7 +1315,10 @@ PHP_FUNCTION(hexAreaKm2)
 
     RETURN_DOUBLE(kilometers2);
 }
+/* }}} */
 
+/* {{{ proto double hexAreaM2(long $res)
+ */
 PHP_FUNCTION(hexAreaM2)
 {
     zend_long res;
@@ -1195,7 +1332,10 @@ PHP_FUNCTION(hexAreaM2)
 
     RETURN_DOUBLE(meters2);
 }
+/* }}} */
 
+/* {{{ proto double cellAreaKm2(long $h)
+ */
 PHP_FUNCTION(cellAreaKm2)
 {
     zend_long h;
@@ -1209,7 +1349,10 @@ PHP_FUNCTION(cellAreaKm2)
 
     RETURN_DOUBLE(kilometers2);
 }
+/* }}} */
 
+/* {{{ proto double cellAreaM2(long $h)
+ */
 PHP_FUNCTION(cellAreaM2)
 {
     zend_long h;
@@ -1223,7 +1366,10 @@ PHP_FUNCTION(cellAreaM2)
 
     RETURN_DOUBLE(meters2);
 }
+/* }}} */
 
+/* {{{ proto double cellAreaRads2(long $h)
+ */
 PHP_FUNCTION(cellAreaRads2)
 {
     zend_long h;
@@ -1237,7 +1383,10 @@ PHP_FUNCTION(cellAreaRads2)
 
     RETURN_DOUBLE(rads2);
 }
+/* }}} */
 
+/* {{{ proto double edgeLengthKm(long $res)
+ */
 PHP_FUNCTION(edgeLengthKm)
 {
     zend_long res;
@@ -1251,7 +1400,10 @@ PHP_FUNCTION(edgeLengthKm)
 
     RETURN_DOUBLE(kilometers);
 }
+/* }}} */
 
+/* {{{ proto double edgeLengthM(long $res)
+ */
 PHP_FUNCTION(edgeLengthM)
 {
     zend_long res;
@@ -1265,7 +1417,10 @@ PHP_FUNCTION(edgeLengthM)
 
     RETURN_DOUBLE(meters);
 }
+/* }}} */
 
+/* {{{ proto double exactEdgeLengthKm(long $edge)
+ */
 PHP_FUNCTION(exactEdgeLengthKm)
 {
     zend_long edge;
@@ -1279,7 +1434,10 @@ PHP_FUNCTION(exactEdgeLengthKm)
 
     RETURN_DOUBLE(kilometers);
 }
+/* }}} */
 
+/* {{{ proto double exactEdgeLengthM(long $edge)
+ */
 PHP_FUNCTION(exactEdgeLengthM)
 {
     zend_long edge;
@@ -1293,7 +1451,10 @@ PHP_FUNCTION(exactEdgeLengthM)
 
     RETURN_DOUBLE(meters);
 }
+/* }}} */
 
+/* {{{ proto double exactEdgeLengthRads(long $edge)
+ */
 PHP_FUNCTION(exactEdgeLengthRads)
 {
     zend_long edge;
@@ -1307,7 +1468,10 @@ PHP_FUNCTION(exactEdgeLengthRads)
 
     RETURN_DOUBLE(rads);
 }
+/* }}} */
 
+/* {{{ proto double numHexagons(long $res)
+ */
 PHP_FUNCTION(numHexagons)
 {
     zend_long res;
@@ -1321,7 +1485,10 @@ PHP_FUNCTION(numHexagons)
 
     RETURN_LONG(number_of_indexes);
 }
+/* }}} */
 
+/* {{{ proto array getRes0Indexes()
+ */
 PHP_FUNCTION(getRes0Indexes)
 {
     int indexcount = res0IndexCount();
@@ -1337,12 +1504,18 @@ PHP_FUNCTION(getRes0Indexes)
 
     free(outs);
 }
+/* }}} */
 
+/* {{{ proto array res0IndexCount()
+ */
 PHP_FUNCTION(res0IndexCount)
 {
     RETURN_LONG(res0IndexCount());
 }
+/* }}} */
 
+/* {{{ proto array getPentagonIndexes(long $res)
+ */
 PHP_FUNCTION(getPentagonIndexes)
 {
     zend_long res;
@@ -1363,13 +1536,19 @@ PHP_FUNCTION(getPentagonIndexes)
         add_index_long(return_value, i, outs[i]);
     }
 }
+/* }}} */
 
+/* {{{ proto long pentagonIndexCount()
+ */
 PHP_FUNCTION(pentagonIndexCount)
 {
     //RETURN_LONG(pentagonIndexCount());
     RETURN_LONG(12);
 }
+/* }}} */
 
+/* {{{ proto double pointDistKm(array $a, array $b)
+ */
 PHP_FUNCTION(pointDistKm)
 {
     zval *a_zval, *b_zval;
@@ -1390,7 +1569,10 @@ PHP_FUNCTION(pointDistKm)
 
     RETURN_DOUBLE(kilometers);
 }
+/* }}} */
 
+/* {{{ proto double pointDistM(array $a, array $b)
+ */
 PHP_FUNCTION(pointDistM)
 {
     zval *a_zval, *b_zval;
@@ -1411,7 +1593,10 @@ PHP_FUNCTION(pointDistM)
 
     RETURN_DOUBLE(meters);
 }
+/* }}} */
 
+/* {{{ proto double pointDistRads(array $a, array $b)
+ */
 PHP_FUNCTION(pointDistRads)
 {
     zval *a_zval, *b_zval;
@@ -1432,6 +1617,7 @@ PHP_FUNCTION(pointDistRads)
 
     RETURN_DOUBLE(rads);
 }
+/* }}} */
 
 /* The previous line is meant for vim and emacs, so it can correctly fold and
    unfold functions in source code. See the corresponding marks just before
@@ -1507,6 +1693,280 @@ PHP_MINFO_FUNCTION(h3)
 }
 /* }}} */
 
+/* {{{ argument information */
+ZEND_BEGIN_ARG_INFO_EX(arginfo_geoToH3, 0, 0, 2)
+    ZEND_ARG_TYPE_INFO(0, lat, IS_DOUBLE, 0)
+    ZEND_ARG_TYPE_INFO(0, lon, IS_DOUBLE, 0)
+    ZEND_ARG_TYPE_INFO(0, resolution, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToGeo, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToGeoBoundary, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3GetResolution, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3GetBaseCell, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_stringToH3, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToString, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3IsValid, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3IsResClassIII, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3IsPentagon, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3GetFaces, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_maxFaceCount, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_kRing, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_maxKringSize, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_kRingDistances, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexRange, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexRangeDistances, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexRanges, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexRing, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, k, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3Line, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, start, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, end, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3LineSize, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, start, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, end, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3Distance, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, origin, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, h3, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_experimentalH3ToLocalIj, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, origin, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, h3, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_experimentalLocalIjToH3, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, origin, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, h3, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToParent, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, parentRes, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToChildren, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, childrenRes, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_maxH3ToChildrenSize, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, childrenRes, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3ToCenterChild, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexed, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, childrenRes, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3Compact, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, indexes, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_uncompact, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, compacted, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, resolution, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_maxUncompactSize, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, compacted, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, resolution, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3IndexesAreNeighbors, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, origin, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, destination, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getH3UnidirectionalEdge, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, origin, IS_LONG, 1)
+    ZEND_ARG_TYPE_INFO(0, destination, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3UnidirectionalEdgeIsValid, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getOriginH3IndexFromUnidirectionalEdge, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getDestinationH3IndexFromUnidirectionalEdge, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getH3IndexesFromUnidirectionalEdge, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getH3UnidirectionalEdgesFromHexagon, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getH3UnidirectionalEdgeBoundary, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_polyfill, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, geopolygons, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, resolution, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_maxPolyfillSize, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, geopolygons, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, resolution, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_h3SetToLinkedGeo, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, h3set, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_degsToRads, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, lat_lon, IS_DOUBLE, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_radsToDegs, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, lat_lon, IS_DOUBLE, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexAreaKm2, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_hexAreaM2, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_cellAreaKm2, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, h, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_cellAreaM2, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, h, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_cellAreaRads2, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, h, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_edgeLengthKm, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_edgeLengthM, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_exactEdgeLengthKm, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_exactEdgeLengthM, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_exactEdgeLengthRads, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, edge, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_numHexagons, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getRes0Indexes, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_res0IndexCount, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_getPentagonIndexes, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, res, IS_LONG, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_pentagonIndexCount, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_pointDistKm, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, a, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, b, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_pointDistM, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, a, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, b, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_pointDistRads, 0, 0, 0)
+    ZEND_ARG_TYPE_INFO(0, a, IS_ARRAY, 1)
+    ZEND_ARG_TYPE_INFO(0, b, IS_ARRAY, 1)
+ZEND_END_ARG_INFO()
+/* }}} */
+
 /* {{{ h3_functions[]
  *
  * Every user visible function must have an entry in h3_functions[].
@@ -1515,81 +1975,81 @@ const zend_function_entry h3_functions[] = {
   
     // global helper
 
-    //Indexing functions
-    PHP_FE(geoToH3,		NULL)
-    PHP_FE(h3ToGeo,		NULL)
-    PHP_FE(h3ToGeoBoundary,		NULL)
+    // Indexing functions
+    PHP_FE(geoToH3,         arginfo_geoToH3)
+    PHP_FE(h3ToGeo,         arginfo_h3ToGeo)
+    PHP_FE(h3ToGeoBoundary, arginfo_h3ToGeoBoundary)
     
-    //Index inspection functions
-    PHP_FE(h3GetResolution,		NULL)
-    PHP_FE(h3GetBaseCell,		NULL)
-    PHP_FE(stringToH3,		NULL)
-    PHP_FE(h3ToString,		NULL)
-    PHP_FE(h3IsValid,		NULL)
-    PHP_FE(h3IsResClassIII,		NULL)
-    PHP_FE(h3IsPentagon,		NULL)
-    PHP_FE(h3GetFaces,		NULL)
-    PHP_FE(maxFaceCount,		NULL)
+    // Index inspection functions
+    PHP_FE(h3GetResolution, arginfo_h3GetResolution)
+    PHP_FE(h3GetBaseCell,   arginfo_h3GetBaseCell)
+    PHP_FE(stringToH3,      arginfo_stringToH3)
+    PHP_FE(h3ToString,      arginfo_h3ToString)
+    PHP_FE(h3IsValid,       arginfo_h3IsValid)
+    PHP_FE(h3IsResClassIII, arginfo_h3IsResClassIII)
+    PHP_FE(h3IsPentagon,    arginfo_h3IsPentagon)
+    PHP_FE(h3GetFaces,      arginfo_h3GetFaces)
+    PHP_FE(maxFaceCount,    arginfo_maxFaceCount)
     
-    //Grid traversal functions
-    PHP_FE(kRing,		NULL)
-    PHP_FE(maxKringSize,		NULL)
-    PHP_FE(kRingDistances,		NULL)
-    PHP_FE(hexRange,		NULL)
-    PHP_FE(hexRangeDistances,		NULL)
-    PHP_FE(hexRanges,		NULL)
-    PHP_FE(hexRing,		NULL)
-    PHP_FE(h3Line,		NULL)
-    PHP_FE(h3LineSize,		NULL)
-    PHP_FE(h3Distance,		NULL)
-    PHP_FE(experimentalH3ToLocalIj,		NULL)
-    PHP_FE(experimentalLocalIjToH3,		NULL)
+    // Grid traversal functions
+    PHP_FE(kRing,                   arginfo_kRing)
+    PHP_FE(maxKringSize,            arginfo_maxKringSize)
+    PHP_FE(kRingDistances,          arginfo_kRingDistances)
+    PHP_FE(hexRange,                arginfo_hexRange)
+    PHP_FE(hexRangeDistances,       arginfo_hexRangeDistances)
+    PHP_FE(hexRanges,               arginfo_hexRanges)
+    PHP_FE(hexRing,                 arginfo_hexRing)
+    PHP_FE(h3Line,                  arginfo_h3Line)
+    PHP_FE(h3LineSize,              arginfo_h3LineSize)
+    PHP_FE(h3Distance,              arginfo_h3Distance)
+    PHP_FE(experimentalH3ToLocalIj, arginfo_experimentalH3ToLocalIj)
+    PHP_FE(experimentalLocalIjToH3, arginfo_experimentalLocalIjToH3)
     
-    //Hierarchical grid functions
-    PHP_FE(h3ToParent,		NULL)
-    PHP_FE(h3ToChildren,		NULL)
-    PHP_FE(maxH3ToChildrenSize,		NULL)
-    PHP_FE(h3ToCenterChild,		NULL)
-    PHP_FE(h3Compact,		NULL)
-    PHP_FE(uncompact,		NULL)
-    PHP_FE(maxUncompactSize,		NULL)
+    // Hierarchical grid functions
+    PHP_FE(h3ToParent,          arginfo_h3ToParent)
+    PHP_FE(h3ToChildren,        arginfo_h3ToChildren)
+    PHP_FE(maxH3ToChildrenSize, arginfo_maxH3ToChildrenSize)
+    PHP_FE(h3ToCenterChild,     arginfo_h3ToCenterChild)
+    PHP_FE(h3Compact,           arginfo_h3Compact)
+    PHP_FE(uncompact,           arginfo_uncompact)
+    PHP_FE(maxUncompactSize,    arginfo_maxUncompactSize)
     
-    //Unidirectional edge functions
-    PHP_FE(h3IndexesAreNeighbors,		NULL)
-    PHP_FE(getH3UnidirectionalEdge,		NULL)
-    PHP_FE(h3UnidirectionalEdgeIsValid,		NULL)
-    PHP_FE(getOriginH3IndexFromUnidirectionalEdge,		NULL)
-    PHP_FE(getDestinationH3IndexFromUnidirectionalEdge,		NULL)
-    PHP_FE(getH3IndexesFromUnidirectionalEdge,		NULL)
-    PHP_FE(getH3UnidirectionalEdgesFromHexagon,		NULL)
-    PHP_FE(getH3UnidirectionalEdgeBoundary,		NULL)
+    // Unidirectional edge functions
+    PHP_FE(h3IndexesAreNeighbors,                       arginfo_h3IndexesAreNeighbors)
+    PHP_FE(getH3UnidirectionalEdge,                     arginfo_getH3UnidirectionalEdge)
+    PHP_FE(h3UnidirectionalEdgeIsValid,                 arginfo_h3UnidirectionalEdgeIsValid)
+    PHP_FE(getOriginH3IndexFromUnidirectionalEdge,      arginfo_getOriginH3IndexFromUnidirectionalEdge)
+    PHP_FE(getDestinationH3IndexFromUnidirectionalEdge, arginfo_getDestinationH3IndexFromUnidirectionalEdge)
+    PHP_FE(getH3IndexesFromUnidirectionalEdge,          arginfo_getH3IndexesFromUnidirectionalEdge)
+    PHP_FE(getH3UnidirectionalEdgesFromHexagon,         arginfo_getH3UnidirectionalEdgesFromHexagon)
+    PHP_FE(getH3UnidirectionalEdgeBoundary,             arginfo_getH3UnidirectionalEdgeBoundary)
     
-    //Region functions
-    PHP_FE(polyfill,		NULL)
-    PHP_FE(maxPolyfillSize,		NULL)
-    PHP_FE(h3SetToLinkedGeo,		NULL)
+    // Region functions
+    PHP_FE(polyfill,            arginfo_polyfill)
+    PHP_FE(maxPolyfillSize,     arginfo_maxPolyfillSize)
+    PHP_FE(h3SetToLinkedGeo,    arginfo_h3SetToLinkedGeo)
     
-    //Miscellaneous H3 functions
-    PHP_FE(degsToRads,		NULL)
-    PHP_FE(radsToDegs,		NULL)
-    PHP_FE(hexAreaKm2,		NULL)
-    PHP_FE(hexAreaM2,		NULL)
-    PHP_FE(cellAreaKm2,		NULL)
-    PHP_FE(cellAreaM2,		NULL)
-    PHP_FE(cellAreaRads2,		NULL)
-    PHP_FE(edgeLengthKm,		NULL)
-    PHP_FE(edgeLengthM,		NULL)
-    PHP_FE(exactEdgeLengthKm,		NULL)
-    PHP_FE(exactEdgeLengthM,		NULL)
-    PHP_FE(exactEdgeLengthRads,		NULL)
-    PHP_FE(numHexagons,		NULL)
-    PHP_FE(getRes0Indexes,		NULL)
-    PHP_FE(res0IndexCount,		NULL)
-    PHP_FE(getPentagonIndexes,		NULL)
-    PHP_FE(pentagonIndexCount,		NULL)
-    PHP_FE(pointDistKm,		NULL)
-    PHP_FE(pointDistM,		NULL)
-    PHP_FE(pointDistRads,		NULL)
+    // Miscellaneous H3 functions
+    PHP_FE(degsToRads,          arginfo_degsToRads)
+    PHP_FE(radsToDegs,          arginfo_radsToDegs)
+    PHP_FE(hexAreaKm2,          arginfo_hexAreaKm2)
+    PHP_FE(hexAreaM2,           arginfo_hexAreaM2)
+    PHP_FE(cellAreaKm2,         arginfo_cellAreaKm2)
+    PHP_FE(cellAreaM2,          arginfo_cellAreaM2)
+    PHP_FE(cellAreaRads2,       arginfo_cellAreaRads2)
+    PHP_FE(edgeLengthKm,        arginfo_edgeLengthKm)
+    PHP_FE(edgeLengthM,         arginfo_edgeLengthM)
+    PHP_FE(exactEdgeLengthKm,   arginfo_exactEdgeLengthKm)
+    PHP_FE(exactEdgeLengthM,    arginfo_exactEdgeLengthM)
+    PHP_FE(exactEdgeLengthRads, arginfo_exactEdgeLengthRads)
+    PHP_FE(numHexagons,         arginfo_numHexagons)
+    PHP_FE(getRes0Indexes,      arginfo_getRes0Indexes)
+    PHP_FE(res0IndexCount,      arginfo_res0IndexCount)
+    PHP_FE(getPentagonIndexes,  arginfo_getPentagonIndexes)
+    PHP_FE(pentagonIndexCount,  arginfo_pentagonIndexCount)
+    PHP_FE(pointDistKm,         arginfo_pointDistKm)
+    PHP_FE(pointDistM,          arginfo_pointDistM)
+    PHP_FE(pointDistRads,       arginfo_pointDistRads)
 
     PHP_FE_END /* Must be the last line in h3_functions[] */
 };
